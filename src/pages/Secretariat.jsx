@@ -1,81 +1,62 @@
 import React from "react";
-import "./Secretariat.css";
 
-const Secretariat = () => {
-  const secretariat = [
-    { role: "Secretary General", name: "Aarshia Kaushik", photo: null },
+const secretariat = [
+  { role: "Secretary General", name: "Aarshia Kaushik", img: "/team/sg.jpg" },
+  { role: "Deputy Secretary General", name: "Vedant Prakash", img: "/team/dsg.jpg" },
 
-    { role: "Deputy Secretary General", name: "Vedant Prakash", photo: null },
+  { role: "Director General – Committees", name: "Person 1", img: "/team/dg-comm-1.jpg" },
+  { role: "Director General – Committees", name: "Person 2", img: "/team/dg-comm-2.jpg" },
 
-    { role: "Director General – Committees", name: "Person 1", photo: null },
-    { role: "Director General – Committees", name: "Person 2", photo: null },
+  { role: "Director General – Conference", name: "Person 3", img: "/team/dg-conf-1.jpg" },
+  { role: "Director General – Conference", name: "Person 4", img: "/team/dg-conf-2.jpg" },
 
-    { role: "Director General – Conference", name: "Person 3", photo: null },
-    { role: "Director General – Conference", name: "Person 4", photo: null },
+  { role: "Director General – Outreach", name: "Person 5", img: "/team/dg-out-1.jpg" },
+  { role: "Director General – Outreach", name: "Person 6", img: "/team/dg-out-2.jpg" },
 
-    { role: "Director General – Outreach", name: "Person 5", photo: null },
-    { role: "Director General – Outreach", name: "Person 6", photo: null },
+  { role: "Editor-in-Chief", name: "Person 7", img: "/team/eic.jpg" },
+];
 
-    { role: "Editor-in-Chief", name: "Person 7", photo: null },
-  ];
-
+export default function Secretariat() {
   return (
-    <section className="secretariat-grid section-lg">
-      <h2 className="section-title">Secretariat</h2>
-      <div className="secretariat-grid__container">
-        
-        {/* Row 1 – 1 SG */}
-        <div className="grid-row full-center">
-          {renderMember(secretariat[0])}
-        </div>
+    <section className="section">
+      <div className="container center">
+        <h1 className="font-accent text-gold title">Secretariat</h1>
 
-        {/* Row 2 – 1 DSG */}
-        <div className="grid-row full-center">
-          {renderMember(secretariat[1])}
-        </div>
+        <div className="grid-3 gap-12 mt-16">
+          {secretariat.map((m, i) => (
+            <div key={i} className="center fade-up" style={{ animationDelay: `${i * 80}ms` }}>
+              
+              {/* PERFECT CIRCLES — NO BORDER — MATCH HOME PAGE */}
+              <div
+                className="circle-large"
+                style={{
+                  width: "180px",
+                  height: "180px",
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  marginBottom: "var(--space-6)",
+                }}
+              >
+                <img
+                  src={m.img}
+                  alt={m.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
 
-        {/* Row 3 – 2 DG Committees */}
-        <div className="grid-row two-col">
-          {renderMember(secretariat[2])}
-          {renderMember(secretariat[3])}
-        </div>
+              {/* ROLE */}
+              <h3 className="font-accent text-orange small-uppercase">
+                {m.role}
+              </h3>
 
-        {/* Row 4 – 2 DG Conference */}
-        <div className="grid-row two-col">
-          {renderMember(secretariat[4])}
-          {renderMember(secretariat[5])}
+              {/* NAME */}
+              <p className="text-cream mt-2" style={{ fontSize: "1.1rem" }}>
+                {m.name}
+              </p>
+            </div>
+          ))}
         </div>
-
-        {/* Row 5 – 2 DG Outreach */}
-        <div className="grid-row two-col">
-          {renderMember(secretariat[6])}
-          {renderMember(secretariat[7])}
-        </div>
-
-        {/* Row 6 – 1 Editor-in-Chief */}
-        <div className="grid-row full-center">
-          {renderMember(secretariat[8])}
-        </div>
-
       </div>
     </section>
   );
-};
-
-const renderMember = (member) => {
-  return (
-    <div className="secretariat-card">
-      <div className="secretariat-card__image">
-        {member.photo ? (
-          <img src={member.photo} alt={member.name} />
-        ) : (
-          <div className="placeholder-image" />
-        )}
-      </div>
-      <h3 className="secretariat-card__name">{member.name}</h3>
-      <p className="secretariat-card__role">{member.role}</p>
-    </div>
-  );
-};
-
-export default Secretariat;
+}
